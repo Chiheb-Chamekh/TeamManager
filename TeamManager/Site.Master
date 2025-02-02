@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TeamManager.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style>
+        /* Sidebar styles */
+        .sidebar {
+            height: 100%;
+            width: 10%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+            color: white;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .no-sidebar .main-content {
+            margin-left: 0;
+        }
+       
+    </style>
+    
+
+</head>
+<body>
+  <form id="form1" runat="server">
+        <div id="sidebar" class="sidebar">
+            <a href="Home.aspx">Home</a>
+            <a href="UserHistory.aspx">Calendar</a>
+             <div id="adminSection" runat="server" >
+                <a href="Dashboard.aspx">Admin Dashboard</a>
+            </div>
+            <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" CssClass="logout-link">Logout</asp:LinkButton>
+        </div>
+
+        <div class="main-content <%= Request.Url.AbsolutePath.Contains("Login") ? "no-sidebar" : "" %>">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+    </form>
+</body>
+    
+</html>
